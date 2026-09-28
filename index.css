@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #06070a;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+
+body {
+  background: #06070a;
+  color: #fff;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.55);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 99px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ---------- typography helpers ---------- */
+.kicker {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.38em;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+  color: transparent;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 15px 30px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(120deg, #7c4dff, #ff3d8e);
+  box-shadow: 0 12px 42px -12px rgba(124, 77, 255, 0.65);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 54px -12px rgba(124, 77, 255, 0.85);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 15px 30px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  transition: all 0.35s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+/* ---------- surfaces ---------- */
+.glass {
+  background: rgba(11, 13, 19, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+}
+
+/* ---------- scroll reveals ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- language swap / hero entrance ---------- */
+@keyframes langIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.lang-swap {
+  animation: langIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(42px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-in {
+  opacity: 0;
+}
+.hero-in.play {
+  animation: heroIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ---------- flavor chips ---------- */
+.chip {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.chip-active {
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+.chip-active span {
+  box-shadow: 0 0 12px var(--chip-color, #888) !important;
+}
+
+/* ---------- scroll hint ---------- */
+@keyframes pulseDot {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(9px);
+    opacity: 0.25;
+  }
+}
+.scroll-dot {
+  animation: pulseDot 1.9s ease-in-out infinite;
+}
+
+/* ---------- film grain ---------- */
+.grain {
+  position: fixed;
+  inset: -12%;
+  background-image: url("/textures/noise.png");
+  background-size: 320px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 70;
+  mix-blend-mode: overlay;
+  animation: grainShift 9s steps(12) infinite;
+}
+@keyframes grainShift {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, 1.5%);
+  }
+  20% {
+    transform: translate(1.5%, -2%);
+  }
+  30% {
+    transform: translate(-1%, -1.5%);
+  }
+  40% {
+    transform: translate(2%, 2%);
+  }
+  50% {
+    transform: translate(-2%, 1%);
+  }
+  60% {
+    transform: translate(1%, -1%);
+  }
+  70% {
+    transform: translate(-1.5%, 2%);
+  }
+  80% {
+    transform: translate(2%, -1.5%);
+  }
+  90% {
+    transform: translate(-1%, 1.5%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* ---------- lenis ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-in {
+    opacity: 1;
+    animation: none !important;
+  }
+  .grain {
+    animation: none;
+  }
+  .scroll-dot {
+    animation: none;
+  }
+}
